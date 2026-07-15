@@ -21,5 +21,6 @@ def call_gemini(question: str) -> str:
             config=generate_config,
         )
         return response.text
-    except genai_errors.APIError:
+    except genai_errors.APIError as e:
+        print(f"Gemini API Error: {e}")
         raise HTTPException(status_code=502, detail="Gemini is not reachable.")
